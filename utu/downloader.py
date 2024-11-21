@@ -3,6 +3,8 @@ from .utils import *
 from io import BytesIO
 import requests 
 from zipfile import ZipFile
+from .useragents import USERAGENTS
+import random
 
 class Downloader:
     
@@ -13,14 +15,16 @@ class Downloader:
 
         url = QUESTION_PAPERS.format(academic_year=resolve_academic_year(year, season), season=season, year=year)
         
-        response = requests.get(url)
+        headers = {"User-Agent": random.choice(USERAGENTS)}
+        response = requests.get(url, headers=headers)
 
         return parse_html(response.text, season)
     
     def download_zip(self, url: str) -> str:
         url = ZIP_URL.format(zip_url=url)
         
-        response = requests.get(url)
+        headers = {"User-Agent": random.choice(USERAGENTS)}
+        response = requests.get(url, headers=headers)
         
         with ZipFile(BytesIO(response.content)) as zipf:
             files = {}
