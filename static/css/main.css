@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.middle-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+form {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    width: 50%;
+}
+
+select, #submitButton {
+    width: 50%;
+}
+
+@media (max-width: 768px) {
+    .middle-container {
+        max-width: 100%; /* Allow full width on small screens */
+    }
+
+    form {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    select, #submitButton {
+        width: 100%;
+    }
+}
+
+.pdf-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    height: 100vh;
+}
+
+.embed-card {
+    padding: 0.5rem;
+    border: 1px solid lightgrey;
+}
+
+.center-text {
+    text-align: center;
+    margin-top: 1rem;
+}

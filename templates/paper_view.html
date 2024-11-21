@@ -1,0 +1,15 @@
+{% if files is string %}
+<p>{{ files }}</p>
+{% endif %}
+<p class="text-secondary center-text">Found {{files|length}} papers in {{time}} seconds</p>
+{% if files is mapping %}
+    <div class="pdf-container">
+        {% for file_name, raw_data in files.items() %}
+        <div class="embed-card">
+            <p>{{ file_name }}</p>
+            <embed src="data:application/pdf;base64,{{ raw_data | b64encode }}" type="application/pdf" width="600" height="500"/>
+        </div>
+    {% endfor %}
+    </div>
+{% endif %}
+

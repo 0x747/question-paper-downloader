@@ -1,0 +1,30 @@
+{% if 'error' in data %}
+    <div class="alert alert-warning mt-5" role="alert">
+        {{data['error']}}
+    </div>  
+{% else %}
+<p class="mt-3 text-secondary">Found {{data.items()|length}} courses for {{season}} {{year}} in {{time}} {{ "second" if time == 1 else "seconds" }}</p>
+<div class="accordion accordion-flush border mb-5" id="accordion">
+    {% for key, value in data.items() %}
+        <div class="accordion-item border">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{loop.index0}}">
+                    &nbsp;{{key}}
+                    &bull;&nbsp;
+                    <span class="text-secondary">{{value|length}} {{"semester" if value|length == 1 else "semesters"}} available</span>
+                </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="collapse{{loop.index0}}" data-bs-parent="#accordion">
+                <div class="accordion-body">
+                    {% for key, value in  value.items()%}
+                        <p>Semester {{key}}: 
+                            <a href="/get-papers/?zip={{value}}" class="link-underline-primary" target="_blank">View question papers</a>
+                        </p>
+                    {% endfor %}
+                </div>
+            </div> 
+        </div>
+        
+    {% endfor %}
+</div>
+{% endif %}
